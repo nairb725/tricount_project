@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Tricount;
 use App\Entity\Users;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,8 +16,6 @@ class UsersType extends AbstractType
         $builder
             ->add('name')
             ->add('password')
-            ->add('tricounts')
-            ->add('user_expense')
         ;
     }
 
