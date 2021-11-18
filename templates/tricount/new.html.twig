@@ -9,9 +9,11 @@
 {% block title %}New Tricount{% endblock %}
 
 {% block body %}
+<div class="container">
     <h1>Create new Tricount</h1>
 
     {{ include('tricount/_form.html.twig') }}
 
-    <a href="{{ path('tricount_index') }}">back to list</a>
+    <a class="btn btn-primary" href="{{ path('tricount_index') }}">back to list</a>
+</div>
 {% endblock %}
