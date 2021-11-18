@@ -35,7 +35,12 @@ class Tricount
     private $User_tricount;
 
     /**
-     * @ORM\OneToMany(targetEntity=Expenses::class, mappedBy="Id_tricount", orphanRemoval=true)
+     * @ORM\Column(type="string", length=11)
+     */
+    private $currency;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Expense::class, mappedBy="id_tricount", orphanRemoval=true)
      */
     private $expenses;
 
@@ -124,6 +129,18 @@ class Tricount
                 $expense->setIdTricount(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCurrency(): ?string
+    {
+        return $this->currency;
+    }
+
+    public function setCurrency(string $currency): self
+    {
+        $this->currency = $currency;
 
         return $this;
     }

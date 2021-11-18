@@ -23,6 +23,7 @@ class TricountType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
             ])
+            ->add('currency')
         ;
     }
 

@@ -35,14 +35,10 @@ class Users
     private $tricounts;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Expenses::class, inversedBy="users")
-     */
-    private $user_expense;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Expenses::class, mappedBy="Id_user", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Expense::class, mappedBy="id_user", orphanRemoval=true)
      */
     private $expenses;
+
 
     public function __construct()
     {
