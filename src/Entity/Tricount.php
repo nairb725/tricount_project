@@ -37,8 +37,7 @@ class Tricount
     /**
      * @ORM\Column(type="string", length=11)
      */
-    private $currency;
-
+    private $currency ="EUR";
     /**
      * @ORM\OneToMany(targetEntity=Expense::class, mappedBy="id_tricount", orphanRemoval=true)
      */
