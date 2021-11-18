@@ -51,7 +51,7 @@ class TricountController extends AbstractController
             $entityManager->persist($tricount);
             $entityManager->flush();
 
-            return $this->redirectToRoute('tricount_notification', array('id' => $tricount->getId()), [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('expense_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('tricount/new.html.twig', [
@@ -105,13 +105,5 @@ class TricountController extends AbstractController
         return $this->redirectToRoute('tricount_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    /**
-     * @Route("/{id}", name="tricount_notification", methods={"GET"})
-     */
-    public function notification(Tricount $tricount): Response
-    {
-        return $this->render('notification/show.html.twig', [
-            'tricount' => $tricount,
-        ]);
-    }
+    
 }

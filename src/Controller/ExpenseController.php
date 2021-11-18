@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Tricount;
 
 /**
  * @Route("/expense")
@@ -39,7 +40,7 @@ class ExpenseController extends AbstractController
             $entityManager->persist($expense);
             $entityManager->flush();
 
-            return $this->redirectToRoute('expense_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('notification_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('expense/new.html.twig', [
@@ -83,11 +84,21 @@ class ExpenseController extends AbstractController
      */
     public function delete(Request $request, Expense $expense, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$expense->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $expense->getId(), $request->request->get('_token'))) {
             $entityManager->remove($expense);
             $entityManager->flush();
         }
 
         return $this->redirectToRoute('expense_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("index_notification", name="tricount_notification", methods={"GET"})
+     */
+    public function notification(Tricount $tricount): Response
+    {
+        return $this->render('notification/show.html.twig', [
+            'tricount' => $tricount,
+        ]);
     }
 }

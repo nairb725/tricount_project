@@ -10,3 +10,5 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
+.idea/tricount_project.iml
+composer.lock
