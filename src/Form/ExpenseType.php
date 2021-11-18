@@ -3,6 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Expense;
+use App\Entity\Tricount;
+use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,7 +18,7 @@ class ExpenseType extends AbstractType
             ->add('name')
             ->add('price')
             ->add('id_user', EntityType::class, [
-                "class" => Users::class,
+                "class" => User::class,
                 "choice_label" => "name",
             ])
             ->add('id_tricount', EntityType::class, [

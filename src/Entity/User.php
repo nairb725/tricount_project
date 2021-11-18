@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\UsersRepository;
+use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=UsersRepository::class)
+ * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class Users
+class User
 {
     /**
      * @ORM\Id
@@ -104,14 +104,14 @@ class Users
     }
 
     /**
-     * @return Collection|Expenses[]
+     * @return Collection|Expense[]
      */
     public function getUserExpense(): Collection
     {
         return $this->user_expense;
     }
 
-    public function addUserExpense(Expenses $userExpense): self
+    public function addUserExpense(Expense $userExpense): self
     {
         if (!$this->user_expense->contains($userExpense)) {
             $this->user_expense[] = $userExpense;
@@ -120,7 +120,7 @@ class Users
         return $this;
     }
 
-    public function removeUserExpense(Expenses $userExpense): self
+    public function removeUserExpense(Expense $userExpense): self
     {
         $this->user_expense->removeElement($userExpense);
 
@@ -128,14 +128,14 @@ class Users
     }
 
     /**
-     * @return Collection|Expenses[]
+     * @return Collection|Expense[]
      */
     public function getExpenses(): Collection
     {
         return $this->expenses;
     }
 
-    public function addExpense(Expenses $expense): self
+    public function addExpense(Expense $expense): self
     {
         if (!$this->expenses->contains($expense)) {
             $this->expenses[] = $expense;
@@ -145,7 +145,7 @@ class Users
         return $this;
     }
 
-    public function removeExpense(Expenses $expense): self
+    public function removeExpense(Expense $expense): self
     {
         if ($this->expenses->removeElement($expense)) {
             // set the owning side to null (unless already changed)
