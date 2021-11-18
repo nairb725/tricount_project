@@ -3,14 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class User
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * @ORM\Id
@@ -20,50 +20,79 @@ class User
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=180, unique=true)
      */
-    private $name;
+    private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+
+    /**
+     * @var string The hashed password
+     * @ORM\Column(type="string")
      */
     private $password;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Tricount::class, mappedBy="User_tricount")
-     */
-    private $tricounts;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Expense::class, mappedBy="id_user")
-     */
-    private $expenses;
-
-
-    public function __construct()
-    {
-        $this->tricounts = new ArrayCollection();
-        $this->expenses = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getEmail(): ?string
     {
-        return $this->name;
+        return $this->email;
     }
 
-    public function setName(string $name): self
+    public function setEmail(string $email): self
     {
-        $this->name = $name;
+        $this->email = $email;
 
         return $this;
     }
 
-    public function getPassword(): ?string
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @deprecated since Symfony 5.3, use getUserIdentifier instead
+     */
+    public function getUsername(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -76,57 +105,22 @@ class User
     }
 
     /**
-     * @return Collection|Tricount[]
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
      */
-    public function getTricounts(): Collection
+    public function getSalt(): ?string
     {
-        return $this->tricounts;
-    }
-
-    public function addTricount(Tricount $tricount): self
-    {
-        if (!$this->tricounts->contains($tricount)) {
-            $this->tricounts[] = $tricount;
-            $tricount->addUserTricount($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTricount(Tricount $tricount): self
-    {
-        if ($this->tricounts->removeElement($tricount)) {
-            $tricount->removeUserTricount($this);
-        }
-
-        return $this;
+        return null;
     }
 
     /**
-     * @return Collection|Expense[]
+     * @see UserInterface
      */
-    public function getExpenses(): Collection
+    public function eraseCredentials()
     {
-        return $this->expenses;
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
-
-    public function addExpense(Expense $expense): self
-    {
-        if (!$this->expenses->contains($expense)) {
-            $this->expenses[] = $expense;
-            $expense->addIdUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeExpense(Expense $expense): self
-    {
-        if ($this->expenses->removeElement($expense)) {
-            $expense->removeIdUser($this);
-        }
-
-        return $this;
-    }
-
 }
