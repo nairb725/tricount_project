@@ -5,11 +5,9 @@ namespace App\Controller;
 use App\Entity\Expense;
 use App\Entity\Tricount;
 use App\Form\TricountType;
-use App\Form\Notification;
 use App\Repository\TricountRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -45,9 +43,7 @@ class TricountController extends AbstractController
         $form = $this->createForm(TricountType::class, $tricount);
         $form->handleRequest($request);
 
-
         if ($form->isSubmitted() && $form->isValid()) {
-            echo "<script> console.log ('PHP:',",  "); </script>";
             $entityManager->persist($tricount);
             $entityManager->flush();
 
