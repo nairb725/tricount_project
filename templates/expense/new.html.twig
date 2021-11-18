@@ -3,15 +3,9 @@
 {% block title %}New Expense{% endblock %}
 
 {% block body %}
-<div class="container">
-<div class="row">
-<div class="col-4"></div>
-<div class="col-4">
     <h1>Create new Expense</h1>
 
     {{ include('expense/_form.html.twig') }}
 
-      <a class="btn btn-primary" href="{{ path('expense_index') }}">back to list</a>
-    </div>  
-<div class="col-4"></div>  
+    <a href="{{ path('expense_index') }}">back to list</a>
 {% endblock %}
