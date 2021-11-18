@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Notification{% endblock %}
+
+{% block body %}
+    <h1>Informations du Tricount</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Hello</th>
+            <td>yann a été notifié que vous lui avez associé le tricount { tricount.title }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('tricount_index') }}">back to list</a>
+
+    {{ include('tricount/_delete_form.html.twig') }}
+{% endblock %}
