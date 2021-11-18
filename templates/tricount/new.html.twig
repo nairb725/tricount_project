@@ -10,10 +10,14 @@
 
 {% block body %}
 <div class="container">
+<div class="row">
+<div class="col-4"></div>
+<div class="col-4">
     <h1>Create new Tricount</h1>
 
     {{ include('tricount/_form.html.twig') }}
 
-    <a class="btn btn-primary" href="{{ path('expense_new') }}">back to list</a>
-</div>
+    <a class="btn btn-primary" href="{{ path('tricount_index') }}">back to list</a>
+    </div>  
+<div class="col-4"></div>  
 {% endblock %}
