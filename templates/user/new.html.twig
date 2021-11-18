@@ -3,9 +3,9 @@
 {% block title %}New Users{% endblock %}
 
 {% block body %}
-    <h1>Create new Users</h1>
+    <h1 class="text-center mt-5 mb-5">Create new Users</h1>
 
     {{ include('user/_form.html.twig') }}
 
-    <a href="{{ path('user_index') }}">back to list</a>
+    <a class="btn btn-primary mt-4" href="{{ path('user_index') }}">back to list</a>
 {% endblock %}

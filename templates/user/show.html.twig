@@ -3,6 +3,7 @@
 {% block title %}Users{% endblock %}
 
 {% block body %}
+<body class="container-fluid"> 
     <h1>Users</h1>
 
     <table class="table">
@@ -21,7 +22,7 @@
             </tr>
         </tbody>
     </table>
-
+</body>
     <a href="{{ path('user_index') }}">back to list</a>
 
     <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
