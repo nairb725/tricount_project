@@ -35,7 +35,7 @@ class User
     private $tricounts;
 
     /**
-     * @ORM\OneToMany(targetEntity=Expense::class, mappedBy="id_user", orphanRemoval=true)
+     * @ORM\ManyToMany(targetEntity=Expense::class, mappedBy="id_user")
      */
     private $expenses;
 
@@ -43,7 +43,6 @@ class User
     public function __construct()
     {
         $this->tricounts = new ArrayCollection();
-        $this->user_expense = new ArrayCollection();
         $this->expenses = new ArrayCollection();
     }
 
@@ -106,30 +105,6 @@ class User
     /**
      * @return Collection|Expense[]
      */
-    public function getUserExpense(): Collection
-    {
-        return $this->user_expense;
-    }
-
-    public function addUserExpense(Expense $userExpense): self
-    {
-        if (!$this->user_expense->contains($userExpense)) {
-            $this->user_expense[] = $userExpense;
-        }
-
-        return $this;
-    }
-
-    public function removeUserExpense(Expense $userExpense): self
-    {
-        $this->user_expense->removeElement($userExpense);
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Expense[]
-     */
     public function getExpenses(): Collection
     {
         return $this->expenses;
@@ -139,7 +114,7 @@ class User
     {
         if (!$this->expenses->contains($expense)) {
             $this->expenses[] = $expense;
-            $expense->setIdUser($this);
+            $expense->addIdUser($this);
         }
 
         return $this;
@@ -148,12 +123,10 @@ class User
     public function removeExpense(Expense $expense): self
     {
         if ($this->expenses->removeElement($expense)) {
-            // set the owning side to null (unless already changed)
-            if ($expense->getIdUser() === $this) {
-                $expense->setIdUser(null);
-            }
+            $expense->removeIdUser($this);
         }
 
         return $this;
     }
+
 }

@@ -46,8 +46,8 @@ class Tricount
 
     public function __construct()
     {
-        $this->User_tricount = new ArrayCollection();
         $this->expenses = new ArrayCollection();
+        $this->User_tricount = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -103,6 +103,19 @@ class Tricount
         return $this;
     }
 
+
+    public function getCurrency(): ?string
+    {
+        return $this->currency;
+    }
+
+    public function setCurrency(string $currency): self
+    {
+        $this->currency = $currency;
+
+        return $this;
+    }
+
     /**
      * @return Collection|Expense[]
      */
@@ -129,18 +142,6 @@ class Tricount
                 $expense->setIdTricount(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getCurrency(): ?string
-    {
-        return $this->currency;
-    }
-
-    public function setCurrency(string $currency): self
-    {
-        $this->currency = $currency;
 
         return $this;
     }

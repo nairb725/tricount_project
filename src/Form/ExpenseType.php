@@ -17,13 +17,15 @@ class ExpenseType extends AbstractType
         $builder
             ->add('name')
             ->add('price')
-            ->add('id_user', EntityType::class, [
-                "class" => User::class,
-                "choice_label" => "name",
-            ])
             ->add('id_tricount', EntityType::class, [
-                "class" => Tricount::class,
-                "choice_label" => "id"
+                'class' => Tricount::class,
+                'choice_label' => 'title',
+            ])
+            ->add('id_user', EntityType::class, [
+                'class' => User::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true,
             ])
         ;
     }
