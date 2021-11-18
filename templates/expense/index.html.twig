@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Expenses index{% endblock %}
+{% block title %}Expense index{% endblock %}
 
 {% block body %}
-    <h1 class="text-center mt-5 mb-5">Expenses index</h1>
+    <h1 class="text-center mt-5 mb-5">Expense index</h1>
 
     <table class="table text-centertable text-center">
         <thead>
@@ -21,8 +21,8 @@
                 <td>{{ expense.name }}</td>
                 <td>{{ expense.price }}</td>
                 <td>
-                    <a class="btn btn-primary text-center" href="{{ path('expenses_show', {'id': expense.id}) }}">show</a>
-                    <a class="btn btn-primary text-center" href="{{ path('expenses_edit', {'id': expense.id}) }}">edit</a>
+                    <a class="btn btn-primary" href="{{ path('expense_show', {'id': expense.id}) }}">show</a>
+                    <a class="btn btn-primary" href="{{ path('expense_edit', {'id': expense.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -33,5 +33,5 @@
         </tbody>
     </table>
 
-    <a class="btn btn-primary text-center" href="{{ path('expenses_new') }}">Create new</a>
+    <a class="btn btn-primary text-center" href="{{ path('expense_new') }}">Create new</a>
 {% endblock %}

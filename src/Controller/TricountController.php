@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Expense;
 use App\Entity\Tricount;
 use App\Form\TricountType;
 use App\Repository\TricountRepository;
@@ -16,6 +17,13 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class TricountController extends AbstractController
 {
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Route("/", name="tricount_index", methods={"GET"})
      */
@@ -51,10 +59,12 @@ class TricountController extends AbstractController
     /**
      * @Route("/{id}", name="tricount_show", methods={"GET"})
      */
-    public function show(Tricount $tricount): Response
+    public function show(Tricount $tricount, int $id): Response
     {
+        $expenses = $this->entityManager->getRepository(Expense::class)->findOneById($id);
         return $this->render('tricount/show.html.twig', [
             'tricount' => $tricount,
+            'expenses' => $expenses
         ]);
     }
 

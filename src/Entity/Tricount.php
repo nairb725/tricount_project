@@ -30,19 +30,24 @@ class Tricount
     private $description;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Users::class, inversedBy="tricounts")
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="tricounts")
      */
     private $User_tricount;
 
     /**
-     * @ORM\OneToMany(targetEntity=Expenses::class, mappedBy="Id_tricount", orphanRemoval=true)
+     * @ORM\Column(type="string", length=11)
+     */
+    private $currency;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Expense::class, mappedBy="id_tricount", orphanRemoval=true)
      */
     private $expenses;
 
     public function __construct()
     {
-        $this->User_tricount = new ArrayCollection();
         $this->expenses = new ArrayCollection();
+        $this->User_tricount = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -75,14 +80,14 @@ class Tricount
     }
 
     /**
-     * @return Collection|Users[]
+     * @return Collection|User[]
      */
     public function getUserTricount(): Collection
     {
         return $this->User_tricount;
     }
 
-    public function addUserTricount(Users $userTricount): self
+    public function addUserTricount(User $userTricount): self
     {
         if (!$this->User_tricount->contains($userTricount)) {
             $this->User_tricount[] = $userTricount;
@@ -91,22 +96,35 @@ class Tricount
         return $this;
     }
 
-    public function removeUserTricount(Users $userTricount): self
+    public function removeUserTricount(User $userTricount): self
     {
         $this->User_tricount->removeElement($userTricount);
 
         return $this;
     }
 
+
+    public function getCurrency(): ?string
+    {
+        return $this->currency;
+    }
+
+    public function setCurrency(string $currency): self
+    {
+        $this->currency = $currency;
+
+        return $this;
+    }
+
     /**
-     * @return Collection|Expenses[]
+     * @return Collection|Expense[]
      */
     public function getExpenses(): Collection
     {
         return $this->expenses;
     }
 
-    public function addExpense(Expenses $expense): self
+    public function addExpense(Expense $expense): self
     {
         if (!$this->expenses->contains($expense)) {
             $this->expenses[] = $expense;
@@ -116,7 +134,7 @@ class Tricount
         return $this;
     }
 
-    public function removeExpense(Expenses $expense): self
+    public function removeExpense(Expense $expense): self
     {
         if ($this->expenses->removeElement($expense)) {
             // set the owning side to null (unless already changed)
