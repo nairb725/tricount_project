@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ExpenseRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,16 +30,20 @@ class Expense
     private $price;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="expenses")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $id_user;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Tricount::class, inversedBy="expenses")
      * @ORM\JoinColumn(nullable=false)
      */
     private $id_tricount;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="expenses")
+     */
+    private $id_user;
+
+    public function __construct()
+    {
+        $this->id_user = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -68,17 +74,6 @@ class Expense
         return $this;
     }
 
-    public function getIdUser(): ?User
-    {
-        return $this->id_user;
-    }
-
-    public function setIdUser(?User $id_user): self
-    {
-        $this->id_user = $id_user;
-
-        return $this;
-    }
 
     public function getIdTricount(): ?Tricount
     {
@@ -88,6 +83,30 @@ class Expense
     public function setIdTricount(?Tricount $id_tricount): self
     {
         $this->id_tricount = $id_tricount;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getIdUser(): Collection
+    {
+        return $this->id_user;
+    }
+
+    public function addIdUser(User $idUser): self
+    {
+        if (!$this->id_user->contains($idUser)) {
+            $this->id_user[] = $idUser;
+        }
+
+        return $this;
+    }
+
+    public function removeIdUser(User $idUser): self
+    {
+        $this->id_user->removeElement($idUser);
 
         return $this;
     }
