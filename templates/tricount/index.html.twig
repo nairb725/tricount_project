@@ -3,10 +3,9 @@
 {% block title %}Tricount index{% endblock %}
 
 {% block body %}
-<body>
-    <h1 class="text-center mt-5 mb-5">Tricount index</h1>
+    <h1>Tricount index</h1>
 
-    <table class="table text-center">
+    <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
@@ -22,8 +21,8 @@
                 <td>{{ tricount.title }}</td>
                 <td>{{ tricount.description }}</td>
                 <td>
-                    <a class="btn btn-primary" href="{{ path('tricount_show', {'id': tricount.id}) }}">show</a>
-                    <a class="btn btn-primary" href="{{ path('tricount_edit', {'id': tricount.id}) }}">edit</a>
+                    <a href="{{ path('tricount_show', {'id': tricount.id}) }}">show</a>
+                    <a href="{{ path('tricount_edit', {'id': tricount.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -34,6 +33,5 @@
         </tbody>
     </table>
 
-    <a class="btn btn-primary mt-5 mb-5" href="{{ path('tricount_new') }}">Create new</a>
-    </body>
+    <a href="{{ path('tricount_new') }}">Create new</a>
 {% endblock %}

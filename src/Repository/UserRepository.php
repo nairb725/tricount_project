@@ -5,12 +5,9 @@ namespace App\Repository;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-<<<<<<< HEAD
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
-=======
->>>>>>> 7922e880e0791ae7043d91d4b601d32d5d5efdab
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,18 +15,13 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
  * @method User[]    findAll()
  * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-<<<<<<< HEAD
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
-=======
-class UserRepository extends ServiceEntityRepository
->>>>>>> 7922e880e0791ae7043d91d4b601d32d5d5efdab
 {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, User::class);
     }
 
-<<<<<<< HEAD
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
      */
@@ -44,8 +36,6 @@ class UserRepository extends ServiceEntityRepository
         $this->_em->flush();
     }
 
-=======
->>>>>>> 7922e880e0791ae7043d91d4b601d32d5d5efdab
     // /**
     //  * @return User[] Returns an array of User objects
     //  */
