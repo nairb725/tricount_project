@@ -26,11 +26,11 @@
         </tbody>
     </table>
 
-    <a class="btn btn-primary" href="{{ path('expense_index') }}">back to list</a>
+    <a class="btn btn-primary mt-3" href="{{ path('expense_index') }}">back to list</a>
 
-    <a class="btn btn-primary" href="{{ path('expense_edit', {'id': expense.id}) }}">edit</a>
+    <a class="btn btn-primary mt-3" href="{{ path('expense_edit', {'id': expense.id}) }}">edit</a>
 
-    {{ include('expense/_delete_form.html.twig') }}
+   <a {{ include('expense/_delete_form.html.twig') }}</a>
     </div>  
 <div class="col-3"></div>  
 </body>

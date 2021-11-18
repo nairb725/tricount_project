@@ -9,11 +9,11 @@
 <div class="col-4">
     <h1>Edit Tricount</h1>
 
-    {{ include('tricount/_form.html.twig', {'button_label': 'Update'}) }}
+   <a {{ include('tricount/_form.html.twig', {'button_label': 'Update'}) }}</a>
 
-    <a class="btn btn-primary" href="{{ path('tricount_index') }}">back to list</a>
+    <a class="btn btn-primary mt-2" href="{{ path('tricount_index') }}">back to list</a>
 
-    {{ include('tricount/_delete_form.html.twig') }}
+  <a {{ include('tricount/_delete_form.html.twig') }}</a>
     <div class="col-4"></div>  
 </body>
 {% endblock %}

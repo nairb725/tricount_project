@@ -9,8 +9,8 @@
 <div class="col-4"></div>
 <div class="col-4">
             <h1 class="text-center mt-5 mb-5">Create new Users</h1>
-            {{ include('user/_form.html.twig') }}
-            <a class="btn btn-primary mt-4" href="{{ path('user_index') }}">back to list</a>
+           <a {{ include('user/_form.html.twig') }} </a>
+            <a class="btn btn-primary mt-3" href="{{ path('user_index') }}">back to list</a>
 </div>  
 <div class="col-4"></div>  
 {% endblock %}
