@@ -3,8 +3,11 @@
 {% block title %}Users{% endblock %}
 
 {% block body %}
-<body class="container-fluid"> 
-    <h1>Users</h1>
+ <h1 class="text-center mt-3 mb-3">Users</h1>
+<body class="container"> 
+<div class="row">
+<div class="col-3"></div>
+<div class="col-6">
 
     <table class="table">
         <tbody>
@@ -22,10 +25,13 @@
             </tr>
         </tbody>
     </table>
-</body>
-    <a href="{{ path('user_index') }}">back to list</a>
+    <a class="btn btn-primary" href="{{ path('user_index') }}">back to list</a>
 
-    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+    <a class="btn btn-primary" href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
 
     {{ include('user/_delete_form.html.twig') }}
+</div>  
+<div class="col-3"></div>  
+</body>
+    
 {% endblock %}
