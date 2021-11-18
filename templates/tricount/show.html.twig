@@ -5,7 +5,7 @@
 {% block body %}
  <h1 class="text-center mt-3 mb-3">Tricount</h1>
 <body class="container"> 
-<div class="row">
+<body class="row">
 <div class="col-3"></div>
 <div class="col-6">
    
@@ -27,6 +27,16 @@
             <tr>
                 <th>Currency</th>
                 <td>{{ tricount.currency }}</td>
+            </tr>
+            <tr>
+                <th>Expense</th>
+                {% for expense in expenses %}
+                    <td>{{ expense.id }}</td>
+                {% else %}
+                    <tr>
+                        <td colspan="4">no records found</td>
+                    </tr>
+                {% endfor %}
             </tr>
         </tbody>
     </table>
