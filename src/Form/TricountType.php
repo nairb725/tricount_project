@@ -3,8 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Tricount;
-use App\Entity\Users;
-use http\Client\Curl\User;
+use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,11 +17,12 @@ class TricountType extends AbstractType
             ->add('title')
             ->add('description')
             ->add('User_tricount', EntityType::class, [
-                'class' => Users::class,
+                'class' => User::class,
                 'choice_label' => 'name',
                 'multiple' => true,
                 'expanded' => true,
             ])
+            ->add('currency')
         ;
     }
 
