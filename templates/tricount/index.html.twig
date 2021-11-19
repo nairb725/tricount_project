@@ -3,9 +3,35 @@
 {% block title %}Tricount index{% endblock %}
 
 {% block body %}
-<body>
-    <h1 class="text-center mt-5 mb-5">Tricount index</h1>
+<style>
+html, body {
+  width: 100%;
+  height:100%;
+}
 
+body {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+</style>
+
+
+<body>
+    <h1 class="text-center mt-5 mb-5">YOUR TRICOUNTS</h1>
+<div class="pl-5 pr-5" style="background-color:white; width:60%; margin-left:300px ">
     <table class="table text-center">
         <thead>
             <tr>
@@ -36,5 +62,6 @@
 
     <a class="btn btn-primary mt-5 mb-5" href="{{ path('tricount_new') }}">Create new</a>
     <a class="btn btn-primary text-center" href="{{ path('expense_index') }}">Expense Tab</a>
+    </div>
     </body>
 {% endblock %}

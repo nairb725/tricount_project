@@ -3,7 +3,35 @@
 {% block title %}Users index{% endblock %}
 
 {% block body %}
-    <h1 class="text-center mt-5 mb-5">Users index</h1>
+
+<style>
+html, body {
+  width: 100%;
+  height:100%;
+}
+
+body {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+</style>
+<body>
+   <h1 class="text-center mt-5 mb-5">USERS</h1>
+<div style="background-color:white; width:60%; margin-left:300px">
+ 
 
     <table class="table text-centertable text-center">
         <thead>
@@ -35,4 +63,6 @@
 
     <a class="btn btn-primary text-center" href="{{ path('user_new') }}">Create new</a>
     <a class="btn btn-primary text-center" href="{{ path('tricount_index') }}">Tricount Tab</a>
+    </div>
+    </body>
 {% endblock %}
