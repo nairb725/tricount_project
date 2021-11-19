@@ -5,17 +5,13 @@
 {% block body %}
  <h1 class="text-center mt-3 mb-3">Tricount</h1>
 <body class="container"> 
-<body class="row">
+<div class="row">
 <div class="col-3"></div>
 <div class="col-6">
    
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ tricount.id }}</td>
-            </tr>
             <tr>
                 <th>Title</th>
                 <td>{{ tricount.title }}</td>
@@ -29,15 +25,25 @@
                 <td>{{ tricount.currency }}</td>
             </tr>
             <tr>
-                <th>Expense</th>
-                {% for expense in expenses %}
-                    <td>{{ expense.id }}</td>
-                {% else %}
+                <th>Qui a payé, combien et pourquoi ?</th>
+                <th>Quand ?</th>
+                <th>Concerne qui ?</th>
+                <th>Pour vous ?</th>
+            </tr>
+            {% for name in names %}
+                <tr>
+                    <td>{{ name.creator }} {{ name.price }} {{ tricount.currency}} {{ name.name }} </td>
+                    <td>{{ name.date|date('Y-m-d H:i:s') }}</td>
+                    <td>{% for j in name.user %}
+                        {{ j }}
+                    {% endfor %}
+                    </td>
+                    {% else %}
                     <tr>
                         <td colspan="4">no records found</td>
                     </tr>
-                {% endfor %}
-            </tr>
+
+            {% endfor %}
         </tbody>
     </table>
 
@@ -47,6 +53,7 @@
 
     {{ include('tricount/_delete_form.html.twig') }}
     </div>  
-<div class="col-3"></div>  
+<div class="col-3"></div>
+</div>
 </body>
 {% endblock %}
