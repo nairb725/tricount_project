@@ -22,9 +22,12 @@ class TricountController extends AbstractController
      */
     public function index(TricountRepository $tricountRepository): Response
     {
-        $this->entityManager = $entityManager;
+        return $this->render('tricount/index.html.twig', [
+            'tricounts' => $tricountRepository->findAll(),
+        ]);
     }
 
+    
     /**
      * @Route("/new", name="tricount_new", methods={"GET", "POST"})
      */
