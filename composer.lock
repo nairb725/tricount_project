@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1bdc6e1d5294a0b8046aaf13bdbc0a01",
+    "content-hash": "7f84991ae88173a0c0e99cc67b51cb61",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -453,14 +453,6 @@
                 "psr-4": {
                     "Doctrine\\DBAL\\": "src"
                 }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Bundle\\SwiftmailerBundle\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -6680,7 +6672,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.2.5",
+        "php": ">=7.0",
         "ext-ctype": "*",
         "ext-iconv": "*"
     },
