@@ -5,12 +5,13 @@
 
 {% block body %}
 <div class="container">
-<div class="row">
-<div class="col-4"></div>
-<div class="col-4">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
             <h1 class="text-center mt-5 mb-5">Create new Users</h1>
-           <a {{ include('user/_form.html.twig') }} </a>
-            <a class="btn btn-primary mt-3" href="{{ path('user_index') }}">back to list</a>
-</div>  
-<div class="col-4"></div>  
+            {{ include('user/_form.html.twig') }}
+        </div>  
+        <div class="col-4"></div>  
+    </div>
+</div>
 {% endblock %}
