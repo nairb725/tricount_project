@@ -12,3 +12,4 @@
 ###< symfony/framework-bundle ###
 .idea/tricount_project.iml
 composer.lock
+.idea/php.xml
