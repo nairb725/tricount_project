@@ -13,6 +13,10 @@
     <table class="table">
         <tbody>
             <tr>
+                <th>Id</th>
+                <td>{{ tricount.id }}</td>
+            </tr>
+            <tr>
                 <th>Title</th>
                 <td>{{ tricount.title }}</td>
             </tr>
@@ -20,37 +24,12 @@
                 <th>Description</th>
                 <td>{{ tricount.description }}</td>
             </tr>
-            <tr>
-                <th>Currency</th>
-                <td>{{ tricount.currency }}</td>
-            </tr>
-            <tr>
-                <th>Qui a payé, combien et pourquoi ?</th>
-                <th>Quand ?</th>
-                <th>Concerne qui ?</th>
-                <th>Pour vous ?</th>
-            </tr>
-            {% for name in names %}
-                <tr>
-                    <td>{{ name.creator }} {{ name.price }} {{ tricount.currency}} {{ name.name }} </td>
-                    <td>{{ name.date|date('Y-m-d H:i:s') }}</td>
-                    <td>{% for j in name.user %}
-                        {{ j }}
-                    {% endfor %}
-                    </td>
-                    {% else %}
-                    <tr>
-                        <td colspan="4">no records found</td>
-                    </tr>
-
-            {% endfor %}
         </tbody>
     </table>
 
     
  {{ include('tricount/showbutton.html.twig') }}
     </div>  
-<div class="col-3"></div>
-</div>
+<div class="col-3"></div>  
 </body>
 {% endblock %}

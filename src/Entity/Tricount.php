@@ -47,22 +47,17 @@ class Tricount
     /**
      * @ORM\ManyToMany(targetEntity=Users::class, inversedBy="tricounts")
      */
-    private $Users;
+    private $User_tricount;
 
     /**
-     * @ORM\Column(type="string", length=11)
-     */
-    private $currency = "EUR";
-
-    /**
-     * @ORM\OneToMany(targetEntity=Expense::class, mappedBy="tricount", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Expenses::class, mappedBy="Id_tricount", orphanRemoval=true)
      */
     private $expenses;
 
     public function __construct()
     {
+        $this->User_tricount = new ArrayCollection();
         $this->expenses = new ArrayCollection();
-        $this->Users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -99,13 +94,13 @@ class Tricount
      */
     public function getUserTricount(): Collection
     {
-        return $this->Users;
+        return $this->User_tricount;
     }
 
     public function addUserTricount(Users $userTricount): self
     {
-        if (!$this->Users->contains($userTricount)) {
-            $this->Users[] = $userTricount;
+        if (!$this->User_tricount->contains($userTricount)) {
+            $this->User_tricount[] = $userTricount;
         }
 
         return $this;
@@ -113,7 +108,7 @@ class Tricount
 
     public function removeUserTricount(Users $userTricount): self
     {
-        $this->Users->removeElement($userTricount);
+        $this->User_tricount->removeElement($userTricount);
 
         return $this;
     }
@@ -130,7 +125,7 @@ class Tricount
     {
         if (!$this->expenses->contains($expense)) {
             $this->expenses[] = $expense;
-            $expense->setTricount($this);
+            $expense->setIdTricount($this);
         }
 
         return $this;
@@ -140,8 +135,8 @@ class Tricount
     {
         if ($this->expenses->removeElement($expense)) {
             // set the owning side to null (unless already changed)
-            if ($expense->getTricount() === $this) {
-                $expense->setTricount(null);
+            if ($expense->getIdTricount() === $this) {
+                $expense->setIdTricount(null);
             }
         }
 

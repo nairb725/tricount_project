@@ -34,27 +34,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string")
      */
     private $password;
-     * @ORM\ManyToMany(targetEntity=Tricount::class, mappedBy="Users")
-     */
-    private $tricounts;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Expense::class, mappedBy="users")
-     */
-    private $expenses;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Expense::class, mappedBy="creator", orphanRemoval=true)
-     */
-    private $expense_owned;
-
-
-    public function __construct()
-    {
-        $this->tricounts = new ArrayCollection();
-        $this->expenses = new ArrayCollection();
-        $this->expense_owned = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -121,10 +100,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
-        if (!$this->expenses->contains($expense)) {
-            $this->expenses[] = $expense;
-            $expense->addUsers($this);
-        }
 
         return $this;
     }
@@ -137,41 +112,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getSalt(): ?string
     {
-        if ($this->expenses->removeElement($expense)) {
-            $expense->removeUsers($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Expense[]
-     */
-    public function getExpenseOwned(): Collection
-    {
-        return $this->expense_owned;
-    }
-
-    public function addExpenseOwned(Expense $expenseOwned): self
-    {
-        if (!$this->expense_owned->contains($expenseOwned)) {
-            $this->expense_owned[] = $expenseOwned;
-            $expenseOwned->setCreator($this);
-        }
-
-        return $this;
-    }
-
-    public function removeExpenseOwned(Expense $expenseOwned): self
-    {
-        if ($this->expense_owned->removeElement($expenseOwned)) {
-            // set the owning side to null (unless already changed)
-            if ($expenseOwned->getCreator() === $this) {
-                $expenseOwned->setCreator(null);
-            }
-        }
-
-        return $this;
+        return null;
     }
 
     /**
