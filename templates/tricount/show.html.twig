@@ -8,10 +8,19 @@
 <div class="row">
 <div class="col-3"></div>
 <div class="col-6">
+    <style>
+        ul {
+            list-style: none;
+        }
+        tbody {
+            text-align: center;
+        }
+
+    </style>
    
 
     <table class="table">
-        <tbody>
+        <tbody >
             <tr>
                 <th>Title</th>
                 <td>{{ tricount.title }}</td>
@@ -24,6 +33,7 @@
                 <th>Currency</th>
                 <td>{{ tricount.currency }}</td>
             </tr>
+
             <tr>
                 <th>Qui a payé, combien et pourquoi ?</th>
                 <th>Quand ?</th>
@@ -34,10 +44,15 @@
                 <tr>
                     <td>{{ name.creator }} {{ name.price }} {{ tricount.currency}} {{ name.name }} </td>
                     <td>{{ name.date|date('Y-m-d H:i:s') }}</td>
-                    <td>{% for j in name.user %}
-                        {{ j }}
+                    <td>
+                    <ul class="pl-0">
+                    {% for j in name.user %}
+                        <li> {{ j }} </li>
                     {% endfor %}
+                    </ul>
                     </td>
+                    <td>{{ name.balance }} {{ tricount.currency}}</td>
+
                     {% else %}
                     <tr>
                         <td colspan="4">no records found</td>

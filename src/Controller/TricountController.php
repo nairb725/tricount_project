@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use App\Service\CalculatorService;
 
 
 /**
@@ -62,9 +63,8 @@ class TricountController extends AbstractController
     /**
      * @Route("/{id}", name="tricount_show", methods={"GET"})
      */
-    public function show(Tricount $tricount): Response
+    public function show(Tricount $tricount, CalculatorService $calculatorService): Response
     {
-
         $manager = $this->getDoctrine()->getManager();
         $expenses = $manager->getRepository(Expense::class)->findByTricount($tricount);
         $names = [];
@@ -81,8 +81,7 @@ class TricountController extends AbstractController
                     $names[$i]['user'][$j] = $user->getName();
                     $j++;
                 }
-
-
+            $names[$i]['balance'] = $calculatorService->calculateBalance($expense->getPrice(), $j);
             $i++;
         }
 
