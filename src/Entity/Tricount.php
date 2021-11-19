@@ -82,23 +82,23 @@ class Tricount
     /**
      * @return Collection|User[]
      */
-    public function getUserTricount(): Collection
+    public function getUsers(): Collection
     {
         return $this->Users;
     }
 
-    public function addUserTricount(User $userTricount): self
+    public function addUsers(User $Users): self
     {
-        if (!$this->Users->contains($userTricount)) {
-            $this->Users[] = $userTricount;
+        if (!$this->Users->contains($Users)) {
+            $this->Users[] = $Users;
         }
 
         return $this;
     }
 
-    public function removeUserTricount(User $userTricount): self
+    public function removeUsers(User $Users): self
     {
-        $this->Users->removeElement($userTricount);
+        $this->Users->removeElement($Users);
 
         return $this;
     }

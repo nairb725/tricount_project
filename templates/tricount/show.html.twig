@@ -78,14 +78,14 @@ body {
                 <th>Concerne qui ?</th>
                 <th>Pour vous ?</th>
             </tr>
-            {% for name in names %}
+            {% for name in expenses %}
                 <tr>
                     <td>{{ name.creator }} {{ name.price }} {{ tricount.currency}} {{ name.name }} </td>
                     <td>{{ name.date|date('Y-m-d H:i:s') }}</td>
                     <td>
                     <ul class="pl-0">
-                    {% for j in name.user %}
-                        <li> {{ j }} </li>
+                    {% for j in name.users %}
+                        <li> {{ j.name}} </li>
                     {% endfor %}
                     </ul>
                     </td>
@@ -99,8 +99,7 @@ body {
             {% endfor %}
         </tbody>
     </table>
-
-    
+    <a class="btn btn-primary text-center" href="{{ path('expense_new') }}">Create new expense</a>
  {{ include('tricount/showbutton.html.twig') }}
     </div>  
 <div class="col-2"></div>

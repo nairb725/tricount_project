@@ -6,6 +6,7 @@ use App\Entity\Tricount;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,14 +16,16 @@ class TricountType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('description')
-            ->add('User_tricount', EntityType::class, [
+            ->add('Users', EntityType::class, [
                 'class' => User::class,
                 'choice_label' => 'name',
                 'multiple' => true,
                 'expanded' => true,
             ])
             ->add('currency')
+            ->add('description' , TextAreaType::class, array(
+                'attr' => array('cols' => '10', 'rows' => '5'),
+            ))
         ;
     }
 
