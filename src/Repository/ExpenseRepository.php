@@ -31,7 +31,7 @@ class ExpensesRepository extends ServiceEntityRepository
             ->orderBy('e.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
-            ->getResult()
+            ->getArrayResult()
         ;
     }
     */

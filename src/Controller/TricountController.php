@@ -10,16 +10,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\PropertyAccess\PropertyAccess;
+
 
 /**
  * @Route("/tricount")
  */
 class TricountController extends AbstractController
 {
-    /**
-     * @Route("/", name="tricount_index", methods={"GET"})
-     */
-    public function index(TricountRepository $tricountRepository): Response
+
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
     {
         return $this->render('tricount/index.html.twig', [
             'tricounts' => $tricountRepository->findAll(),
@@ -64,8 +66,32 @@ class TricountController extends AbstractController
      */
     public function show(Tricount $tricount): Response
     {
+
+        $manager = $this->getDoctrine()->getManager();
+        $expenses = $manager->getRepository(Expense::class)->findByTricount($tricount);
+        $names = [];
+        $i = 0;
+        foreach($expenses as $expense) {
+            $j = 0;
+            $names[$i]['price'] = $expense->getPrice();
+            $names[$i]['name'] = $expense->getName();
+            $names[$i]['date'] = $expense->getDate();
+            $creators = $expense->getCreator();
+            $names[$i]['creator'] = $creators->getName();
+            $users = $expense->getUsers();
+                foreach ($users as $user) {
+                    $names[$i]['user'][$j] = $user->getName();
+                    $j++;
+                }
+
+
+            $i++;
+        }
+
         return $this->render('tricount/show.html.twig', [
             'tricount' => $tricount,
+            'expenses' => $expenses,
+            'names' => $names
         ]);
     }
 
