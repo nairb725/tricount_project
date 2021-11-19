@@ -19,6 +19,8 @@ class TricountRepository extends ServiceEntityRepository
         parent::__construct($registry, Tricount::class);
     }
 
+
+
     // /**
     //  * @return Tricount[] Returns an array of Tricount objects
     //  */

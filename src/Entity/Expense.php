@@ -33,16 +33,27 @@ class Expense
      * @ORM\ManyToOne(targetEntity=Tricount::class, inversedBy="expenses")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $id_tricount;
+    private $tricount;
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="expenses")
      */
-    private $id_user;
+    private $users;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $date;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="expense_owned")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $creator;
 
     public function __construct()
     {
-        $this->id_user = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -75,14 +86,14 @@ class Expense
     }
 
 
-    public function getIdTricount(): ?Tricount
+    public function getTricount(): ?Tricount
     {
-        return $this->id_tricount;
+        return $this->tricount;
     }
 
-    public function setIdTricount(?Tricount $id_tricount): self
+    public function setTricount(?Tricount $tricount): self
     {
-        $this->id_tricount = $id_tricount;
+        $this->tricount = $tricount;
 
         return $this;
     }
@@ -90,23 +101,47 @@ class Expense
     /**
      * @return Collection|User[]
      */
-    public function getIdUser(): Collection
+    public function getUsers(): Collection
     {
-        return $this->id_user;
+        return $this->users;
     }
 
-    public function addIdUser(User $idUser): self
+    public function addUsers(User $users): self
     {
-        if (!$this->id_user->contains($idUser)) {
-            $this->id_user[] = $idUser;
+        if (!$this->users->contains($users)) {
+            $this->users[] = $users;
         }
 
         return $this;
     }
 
-    public function removeIdUser(User $idUser): self
+    public function removeUsers(User $users): self
     {
-        $this->id_user->removeElement($idUser);
+        $this->users->removeElement($users);
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getCreator(): ?User
+    {
+        return $this->creator;
+    }
+
+    public function setCreator(?User $creator): self
+    {
+        $this->creator = $creator;
 
         return $this;
     }
