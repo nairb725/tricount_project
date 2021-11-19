@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Expense;
 use App\Entity\Tricount;
 use App\Form\TricountType;
 use App\Repository\TricountRepository;
@@ -23,20 +24,17 @@ class TricountController extends AbstractController
 
     public function __construct(EntityManagerInterface $entityManager)
     {
-        return $this->render('tricount/index.html.twig', [
-            'tricounts' => $tricountRepository->findAll(),
-        ]);
+        $this->entityManager = $entityManager;
     }
 
     /**
-     * @Route("/filter", name="tricount_filter", methods={"GET"})
+     * @Route("/", name="tricount_index", methods={"GET"})
      */
-    public function filter(TricountRepository $tricountRepository): Response
+    public function index(TricountRepository $tricountRepository): Response
     {
         return $this->render('tricount/index.html.twig', [
             'tricounts' => $tricountRepository->findAll(),
         ]);
-
     }
 
     /**
@@ -52,7 +50,7 @@ class TricountController extends AbstractController
             $entityManager->persist($tricount);
             $entityManager->flush();
 
-            return $this->redirectToRoute('expense_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('tricount_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('tricount/new.html.twig', [
@@ -79,10 +77,10 @@ class TricountController extends AbstractController
             $creators = $expense->getCreator();
             $names[$i]['creator'] = $creators->getName();
             $users = $expense->getUsers();
-                foreach ($users as $user) {
-                    $names[$i]['user'][$j] = $user->getName();
-                    $j++;
-                }
+            foreach ($users as $user) {
+                $names[$i]['user'][$j] = $user->getName();
+                $j++;
+            }
 
 
             $i++;
@@ -127,6 +125,4 @@ class TricountController extends AbstractController
 
         return $this->redirectToRoute('tricount_index', [], Response::HTTP_SEE_OTHER);
     }
-
-    
 }

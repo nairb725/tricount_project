@@ -25,6 +25,21 @@ class Tricount
     private $title;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @ORM\ManyToMany (targetEntity=Tricount::class, mappedBy="Users")
+     */
+    private $password;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $tricounts;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $description;
