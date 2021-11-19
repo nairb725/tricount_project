@@ -37,16 +37,6 @@ class Tricount
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $tricounts;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $description;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Users::class, inversedBy="tricounts")
-     */
     private $User_tricount;
 
     /**
