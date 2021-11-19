@@ -37,9 +37,8 @@ body {
 <body class="container" style="padding-top:50px"> 
 <h1 class="text-center mt-3 mb-3">Tricount</h1>
 <div class="row">
-<<<<<<< Updated upstream
 <div class="col-3"></div>
-<div class="col-6">
+<div class="col-6  pb-3 pl-3 pr-3 pt-3"style="background-color:white"  >
     <style>
         ul {
             list-style: none;
@@ -49,10 +48,6 @@ body {
         }
 
     </style>
-=======
-<div class="col-2"></div>
-<div class="col-8" style="background-color: white; padding-bottom:20px">
->>>>>>> Stashed changes
    
 
 
@@ -87,16 +82,10 @@ body {
                 <tr>
                     <td>{{ name.creator }} {{ name.price }} {{ tricount.currency}} {{ name.name }} </td>
                     <td>{{ name.date|date('Y-m-d H:i:s') }}</td>
-<<<<<<< Updated upstream
                     <td>
                     <ul class="pl-0">
                     {% for j in name.user %}
                         <li> {{ j }} </li>
-=======
-                    <ul>
-                    <td>{% for j in name.user %}
-                       <li> {{ j }} </li>
->>>>>>> Stashed changes
                     {% endfor %}
                     </ul>
                     </td>
